@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>vue-count-to</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+
+<body>
+  <script src="../data.js"></script>
+  <script src='https://unpkg.com/vue@2.5.11'></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="../dist/vue-tree-table.min.js"></script>
+
+
+  <div id="app">
+    <template>
+      <tree-table :data="data"  border fit highlight-current-row selection @selection-change="handleSelectionChange">
+        <el-table-column label="Title">
+          <slot name="header"></slot>
+          <template slot-scope="scope">
+            {{scope.row.name}}
+          </template>
+        </el-table-column>
+      </tree-table>
+    </template>
+  </div>
+  <script>
+    var Main = {
+      name: 'test',
+      data() {
+        return {
+          data:[]
+        }
+      },
+      created(){
+        this.data=dataJson
+      },
+      computed: {
+
+      },
+      methods: {
+        handleSelectionChange(val) {
+          console.log(val)
+        }
+      }
+    };
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+  </script>
+</body>
+
+</html>
